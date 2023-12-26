@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:todo_app/create_screen.dart';
 
 class MainScreen extends StatelessWidget {
   const MainScreen({super.key});
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -23,7 +23,10 @@ class MainScreen extends StatelessWidget {
         ],
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () {},
+        onPressed: () {
+          Navigator.push(context,
+              MaterialPageRoute(builder: (context) => const CreateScreen()));
+        },
         child: const Icon(Icons.add),
       ),
     );
