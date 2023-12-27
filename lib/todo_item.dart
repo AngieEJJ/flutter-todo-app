@@ -6,11 +6,13 @@ import 'model/todo.dart';
 class TodoItem extends StatelessWidget {
   final Todo todo;
   final Function(Todo) onClicked; //Todo객체를 부르는 함수
+  final Function(Todo) onDelete;
 
   const TodoItem({
     super.key,
     required this.todo,
     required this.onClicked,
+    required this.onDelete,
   });
 
   @override
@@ -24,8 +26,17 @@ class TodoItem extends StatelessWidget {
           ? const Icon(Icons.check_circle, color: Colors.green)
           : const Icon(Icons.check_circle),
       title: Text(todo.title),
-      subtitle: Text(DateFormat.yMMMd()
-          .format(DateTime.fromMicrosecondsSinceEpoch(todo.dateTime))),
+      subtitle: Text(
+        DateFormat.yMMMd()
+            .format(DateTime.fromMicrosecondsSinceEpoch(todo.dateTime)),
+      ),
+      trailing: todo.isDone
+          ? GestureDetector(
+              onTap: () {
+                onDelete(todo);
+              },
+              child: const Icon(Icons.delete_forever))
+          : null,
     );
   }
 }

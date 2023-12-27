@@ -20,14 +20,17 @@ class _MainScreenState extends State<MainScreen> {
       body: ListView(
         children: todos.values
             .map((e) => TodoItem(
-                  todo: e,
-                  onClicked: (todo) async {
-                    todo.isDone = !todo.isDone;
-                    await todo.save();
+                todo: e,
+                onClicked: (todo) async {
+                  todo.isDone = !todo.isDone;
+                  await todo.save();
 
-                    setState(() {});
-                  },
-                ))
+                  setState(() {});
+                },
+                onDelete: (todo) async {
+                  await todo.delete();
+                  setState(() {});
+                }))
             .toList(),
       ),
       floatingActionButton: FloatingActionButton(
